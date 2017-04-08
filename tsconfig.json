@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "outDir": "lib",
+    "watch": true,
+    "declaration": true
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "compileOnSave": true
+}

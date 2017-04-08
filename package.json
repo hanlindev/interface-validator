@@ -1,0 +1,36 @@
+{
+  "name": "interface-validator",
+  "version": "1.0.0",
+  "description": "Validate JSON objects with TypeScript-like interface specifications.",
+  "main": "lib/interface-validator.js",
+  "scripts": {
+    "test": "mocha",
+    "prepublish": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanlindev/interface-validator.git"
+  },
+  "keywords": [
+    "validator",
+    "typescript",
+    "interface"
+  ],
+  "author": "Han Lin <hanlin.dev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hanlindev/interface-validator/issues"
+  },
+  "homepage": "https://github.com/hanlindev/interface-validator#readme",
+  "dependencies": {
+    "@types/lodash": "^4.14.62",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "types": "./lib/interface-validator.d.ts"
+}
