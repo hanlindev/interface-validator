@@ -1,8 +1,8 @@
-import {getMismatchedFields, validate, Interface} from '../interface-validator';
+import {getMismatchedFields, Interface} from '../interface-validator';
 import {expect} from 'chai';
 
 describe('interface-validator getMismatchedFields', () => {
-  let tested: Object;
+  let tested;
   
   beforeEach(() => {
     tested = {
@@ -16,7 +16,60 @@ describe('interface-validator getMismatchedFields', () => {
         },
         string: 'nested str',
       },
+      castToNumber: '123',
+      castToNumberFail: 'one',
+      castToBoolean: 'true',
+      castToBooleanFail: 'yes',
+      emptyString: '',
     };
+  });
+
+  describe('autocast', () => {
+    it('auto cast numbers and booleans', () => {
+      const spec: Interface = {
+        castToNumber: 'number!',
+        castToBoolean: 'boolean!',
+      };
+      expect(getMismatchedFields(tested, spec)).to.be.empty;
+      expect(tested.castToNumber).to.eq(123);
+      expect(tested.castToBoolean).to.eq(true);
+    });
+
+    it('does not cast when auto cast is turned off', () => {
+      const spec: Interface = {
+        castToNumber: 'number',
+        castToBoolean: 'boolean',
+      };
+      expect(getMismatchedFields(tested, spec)).to.eql(['castToNumber', 'castToBoolean']);
+    });
+
+    it('auto cast non-compliant fields to undefined', () => {
+      const spec: Interface = {
+        castToNumberFail: 'number!',
+        castToBooleanFail: 'boolean!',
+      };
+      expect(getMismatchedFields(tested, spec)).to.eql(
+        ['castToNumberFail', 'castToBooleanFail'],
+      );
+      expect(tested.castToNumberFail).to.eq(undefined);
+      expect(tested.castToBooleanFail).to.eq(undefined);
+    });
+  });
+
+  describe('empty string', () => {
+    it('Fails empty string when tested against string!', () => {
+      const spec: Interface = {
+        emptyString: 'string!'
+      };
+      expect(getMismatchedFields(tested, spec)).to.eql(['emptyString']);
+      expect(tested.emptyString).to.be.undefined;
+    });
+    it('Passes empty string when tested against string', () => {
+      const spec: Interface = {
+        emptyString: 'string',
+      };
+      expect(getMismatchedFields(tested, spec)).to.eql([]);
+    });
   });
 
   describe('single level interface', () => {
