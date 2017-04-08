@@ -5,7 +5,6 @@
     "noImplicitAny": false,
     "moduleResolution": "node",
     "outDir": "lib",
-    "watch": true,
     "declaration": true
   },
   "include": [
