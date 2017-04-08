@@ -1,6 +1,6 @@
 {
   "name": "interface-validator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Validate JSON objects with TypeScript-like interface specifications.",
   "main": "lib/interface-validator.js",
   "scripts": {
